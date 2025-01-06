@@ -13,7 +13,7 @@ public class Product {
     private Integer stock;
     private String description;
     private Date createdDate;
-    private Date lstModifiedDate;
+    private Date lastModifiedDate;
 
     public String getImageUrl() {
         return imageUrl;
@@ -78,11 +78,11 @@ public class Product {
         this.createdDate = createdDate;
     }
 
-    public Date getLstModifiedDate() {
-        return lstModifiedDate;
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public void setLstModifiedDate(Date lstModifiedDate) {
-        this.lstModifiedDate = lstModifiedDate;
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 }
