@@ -1,6 +1,7 @@
 package com.rayyou.springbootmall.controller;
 
 import com.rayyou.springbootmall.dto.CreateOrderRequest;
+import com.rayyou.springbootmall.model.Order;
 import com.rayyou.springbootmall.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,11 @@ public class OrderController {
     @PostMapping("user/{userId}/orders")
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
                                          @RequestBody @Valid CreateOrderRequest createOrderRequest){
-         Integer ordererId = orderService.createOrder(userId,createOrderRequest);
+         Integer orderId = orderService.createOrder(userId,createOrderRequest);
 
-         return ResponseEntity.status(HttpStatus.CREATED).body(ordererId);
+         Order order = orderService.getOrderById(orderId);
+
+         return ResponseEntity.status(HttpStatus.CREATED).body(order);
 
     }
 }
