@@ -5,6 +5,7 @@ import com.rayyou.springbootmall.dao.ProductDao;
 import com.rayyou.springbootmall.dao.UserDao;
 import com.rayyou.springbootmall.dto.BuyItem;
 import com.rayyou.springbootmall.dto.CreateOrderRequest;
+import com.rayyou.springbootmall.dto.OrderQueryParams;
 import com.rayyou.springbootmall.model.Order;
 import com.rayyou.springbootmall.model.OrderItem;
 import com.rayyou.springbootmall.model.Product;
@@ -35,6 +36,24 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private UserDao userDao;
+
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+        return orderDao.countOrder(orderQueryParams);
+    }
+
+
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for (Order order : orderList) {
+            List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(order.getOrderId());
+
+            order.setOrderItemList(orderItemList);
+        }
+
+        return orderList;
+    }
+
 
     @Override
     public Order getOrderById(Integer orderId) {
